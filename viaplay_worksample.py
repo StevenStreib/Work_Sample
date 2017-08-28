@@ -1,6 +1,6 @@
 import troposphere.ec2 as ec2
 import troposphere.sns as sns
-from troposphere import Join, Output, Ref, Tags, Template
+from troposphere import Join, Output, Parameter, Ref, Tags, Template
 
 # Create template object. This will be added to throughout the script
 template = Template()
@@ -24,7 +24,38 @@ metadata = {
 template.add_metadata(metadata)
 
 # Create Parameters and add to template
+parameter_environment = Parameter(
+    "Environment",
+    Type="String",
+    Default="ApiDev",
+    Description="Environment of the VPC"
+)
+template.add_parameter(parameter_environment)
 
+parameter_owner = Parameter(
+    "Owner",
+    Type="String",
+    Default="Foo industries",
+    Description="Business unit that owns the resources in the stack"
+)
+template.add_parameter(parameter_owner)
+
+parameter_service = Parameter(
+    "Service",
+    Type="String",
+    Default="ServiceVPC",
+    Description="The name of the service that utilizes this VPC"
+)
+template.add_parameter(parameter_service)
+
+parameter_vpc = Parameter(
+    "VPCScope",
+    Type="String",
+    Default="Dev",
+    Description="The scope of the VPC being launched",
+    AllowedValues=["Dev", "Test", "Prod"]
+)
+template.add_parameter(parameter_vpc)
 
 # Populate Outputs and add to template
 outputs = [
@@ -40,11 +71,11 @@ template.add_output(outputs)
 
 # Declare Tags Dictionary to be used throughout resource declaration
 resource_tags = {
-    "Environment": "ApiDev",
+    "Environment": Ref("Environment"),
     "Name": "",
-    "Owner": "Foo industries",
-    "Service": "ServiceVPC",
-    "VPC": "Dev"
+    "Owner": Ref("Owner"),
+    "Service": Ref("Service"),
+    "VPC": Ref("VPCScope")
 }
 
 # Add Security Group for Bastion Hosts

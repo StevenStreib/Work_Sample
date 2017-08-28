@@ -48,6 +48,33 @@
             }
         }
     },
+    "Parameters": {
+        "Environment": {
+            "Default": "ApiDev",
+            "Description": "Environment of the VPC",
+            "Type": "String"
+        },
+        "Owner": {
+            "Default": "Foo industries",
+            "Description": "Business unit that owns the resources in the stack",
+            "Type": "String"
+        },
+        "Service": {
+            "Default": "ServiceVPC",
+            "Description": "The name of the service that utilizes this VPC",
+            "Type": "String"
+        },
+        "VPCScope": {
+            "AllowedValues": [
+                "Dev",
+                "Test",
+                "Prod"
+            ],
+            "Default": "Dev",
+            "Description": "The scope of the VPC being launched",
+            "Type": "String"
+        }
+    },
     "Resources": {
         "BastionSG": {
             "Properties": {
@@ -55,7 +82,9 @@
                 "Tags": [
                     {
                         "Key": "Environment",
-                        "Value": "ApiDev"
+                        "Value": {
+                            "Ref": "Environment"
+                        }
                     },
                     {
                         "Key": "Name",
@@ -63,15 +92,21 @@
                     },
                     {
                         "Key": "Owner",
-                        "Value": "Foo industries"
+                        "Value": {
+                            "Ref": "Owner"
+                        }
                     },
                     {
                         "Key": "Service",
-                        "Value": "ServiceVPC"
+                        "Value": {
+                            "Ref": "Service"
+                        }
                     },
                     {
                         "Key": "VPC",
-                        "Value": "Dev"
+                        "Value": {
+                            "Ref": "VPCScope"
+                        }
                     }
                 ],
                 "VpcId": {
@@ -105,7 +140,9 @@
                 "Tags": [
                     {
                         "Key": "Environment",
-                        "Value": "ApiDev"
+                        "Value": {
+                            "Ref": "Environment"
+                        }
                     },
                     {
                         "Key": "Name",
@@ -113,15 +150,21 @@
                     },
                     {
                         "Key": "Owner",
-                        "Value": "Foo industries"
+                        "Value": {
+                            "Ref": "Owner"
+                        }
                     },
                     {
                         "Key": "Service",
-                        "Value": "ServiceVPC"
+                        "Value": {
+                            "Ref": "Service"
+                        }
                     },
                     {
                         "Key": "VPC",
-                        "Value": "Dev"
+                        "Value": {
+                            "Ref": "VPCScope"
+                        }
                     }
                 ]
             },
@@ -132,7 +175,9 @@
                 "Tags": [
                     {
                         "Key": "Environment",
-                        "Value": "ApiDev"
+                        "Value": {
+                            "Ref": "Environment"
+                        }
                     },
                     {
                         "Key": "Name",
@@ -140,15 +185,21 @@
                     },
                     {
                         "Key": "Owner",
-                        "Value": "Foo industries"
+                        "Value": {
+                            "Ref": "Owner"
+                        }
                     },
                     {
                         "Key": "Service",
-                        "Value": "ServiceVPC"
+                        "Value": {
+                            "Ref": "Service"
+                        }
                     },
                     {
                         "Key": "VPC",
-                        "Value": "Dev"
+                        "Value": {
+                            "Ref": "VPCScope"
+                        }
                     }
                 ]
             },
@@ -169,7 +220,9 @@
                 "Tags": [
                     {
                         "Key": "Environment",
-                        "Value": "ApiDev"
+                        "Value": {
+                            "Ref": "Environment"
+                        }
                     },
                     {
                         "Key": "Name",
@@ -177,15 +230,21 @@
                     },
                     {
                         "Key": "Owner",
-                        "Value": "Foo industries"
+                        "Value": {
+                            "Ref": "Owner"
+                        }
                     },
                     {
                         "Key": "Service",
-                        "Value": "ServiceVPC"
+                        "Value": {
+                            "Ref": "Service"
+                        }
                     },
                     {
                         "Key": "VPC",
-                        "Value": "Dev"
+                        "Value": {
+                            "Ref": "VPCScope"
+                        }
                     }
                 ]
             },
@@ -218,7 +277,9 @@
                 "Tags": [
                     {
                         "Key": "Environment",
-                        "Value": "ApiDev"
+                        "Value": {
+                            "Ref": "Environment"
+                        }
                     },
                     {
                         "Key": "Name",
@@ -226,15 +287,21 @@
                     },
                     {
                         "Key": "Owner",
-                        "Value": "Foo industries"
+                        "Value": {
+                            "Ref": "Owner"
+                        }
                     },
                     {
                         "Key": "Service",
-                        "Value": "ServiceVPC"
+                        "Value": {
+                            "Ref": "Service"
+                        }
                     },
                     {
                         "Key": "VPC",
-                        "Value": "Dev"
+                        "Value": {
+                            "Ref": "VPCScope"
+                        }
                     }
                 ],
                 "VpcId": {
