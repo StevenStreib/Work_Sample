@@ -1,4 +1,4 @@
-# Work_Samples
+# Work Sample
 Project using Troposphere to generate a CloudFormation script.
 
 # Design Considerations
