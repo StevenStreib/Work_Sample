@@ -2,14 +2,14 @@ import troposphere.ec2 as ec2
 import troposphere.sns as sns
 from troposphere import Join, Output, Ref, Tags, Template
 
-# Create template variable
+# Create template object. This will be added to throughout the script
 template = Template()
 
-# Populate Description and add to template
+# Set Description and add to template
 description = "Service VPC - used for services"
 template.add_description(description)
 
-# Populate Metadata and add to template
+# Set Metadata and add to template
 metadata = {
     "Build": "development",
     "DependsOn": [],
@@ -22,6 +22,9 @@ metadata = {
     "TemplatePath": "ApiDev/Dev/VPC"
 }
 template.add_metadata(metadata)
+
+# Create Parameters and add to template
+
 
 # Populate Outputs and add to template
 outputs = [
@@ -46,11 +49,16 @@ resource_tags = {
 
 # Add Security Group for Bastion Hosts
 resource_tags.update({"Name": "ApiDev-Dev-VPC-Bastion-SG"})
+BastionSGProperties = {
+    "GroupDescription": "Used for source/dest rules",
+    "Tags": Tags(resource_tags),
+    "VpcId": Ref("VPC")
+}
 BastionSG = ec2.SecurityGroup(
     "BastionSG",
-    GroupDescription="Used for source/dest rules",
-    Tags=Tags(resource_tags),
-    VpcId=Ref("VPC")
+    GroupDescription=BastionSGProperties.get("GroupDescription"),
+    Tags=BastionSGProperties.get("Tags"),
+    VpcId=BastionSGProperties.get("VpcId")
 )
 template.add_resource(BastionSG)
 
